@@ -1,27 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quiz/quiz.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(),
-    );
-  }
+  runApp(const Quiz());
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+  const MyHomePage(this.startQuiz, {super.key});
+
+  final void Function() startQuiz;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +44,7 @@ class MyHomePage extends StatelessWidget {
               ),
               const SizedBox(height: 60),
               OutlinedButton.icon(
-                onPressed: () {},
+                onPressed: startQuiz,
                 style: OutlinedButton.styleFrom(
                   foregroundColor: Colors.white,
                 ),

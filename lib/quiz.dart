@@ -26,6 +26,7 @@ class _QuizState extends State<Quiz> {
 
   void switchScreen() {
     setState(() {
+      selectedAnswers = [];
       activeScreen = QuestionScreen(chooseAnswer);
     });
   }
@@ -36,7 +37,7 @@ class _QuizState extends State<Quiz> {
     if (selectedAnswers.length == answers.length / 2) {
       setState(
         () {
-          activeScreen = ResultsScreen(selectedAnswers);
+          activeScreen = ResultsScreen(selectedAnswers, switchScreen);
         },
       );
     }
@@ -47,7 +48,8 @@ class _QuizState extends State<Quiz> {
     return MaterialApp(
       title: 'Linguagens do Amor',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 230, 93, 44)),
         useMaterial3: true,
       ),
       home: Scaffold(
@@ -55,8 +57,8 @@ class _QuizState extends State<Quiz> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.deepPurple,
-                Colors.purpleAccent,
+                Color.fromARGB(255, 248, 198, 104),
+                Color.fromARGB(255, 255, 141, 48),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,

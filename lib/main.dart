@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/quiz.dart';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const Quiz());
 }
 
@@ -18,26 +26,27 @@ class MyHomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(
-            'assets/images/quiz-logo.png',
-            width: 400,
-            color: const Color.fromARGB(150, 255, 255, 255),
+            'assets/images/5.png',
+            width: 300,
           ),
           const SizedBox(height: 40),
           const Text(
-            'Learn Flutter the fun way!',
+            'Descubra sua linguagem do amor!',
             style: TextStyle(
               fontSize: 20,
               color: Colors.white,
+              fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 60),
-          OutlinedButton.icon(
+          ElevatedButton.icon(
             onPressed: startQuiz,
-            style: OutlinedButton.styleFrom(
-              foregroundColor: Colors.white,
+            style: ElevatedButton.styleFrom(
+              foregroundColor: const Color.fromARGB(255, 245, 228, 188),
+              backgroundColor: const Color.fromARGB(255, 33, 190, 128),
             ),
             icon: const Icon(Icons.arrow_right_alt),
-            label: const Text('Start quiz'),
+            label: const Text('Iniciar Quiz'),
           ),
         ],
       ),

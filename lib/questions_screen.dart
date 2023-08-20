@@ -35,7 +35,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
           children: [
             const Text(
               "Considero mais importante quando:",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 30),

@@ -3,9 +3,10 @@ import 'package:flutter_quiz/data/questions.dart';
 import 'package:flutter_quiz/questions_summary.dart';
 
 class ResultsScreen extends StatelessWidget {
-  const ResultsScreen(this.chosenAnswers, {super.key});
+  const ResultsScreen(this.chosenAnswers, this.startQuiz, {super.key});
 
   final List<String> chosenAnswers;
+  final void Function() startQuiz;
 
   List<Map<String, Object>> get summaryData {
     final List<Map<String, Object>> summary = [];
@@ -39,20 +40,24 @@ class ResultsScreen extends StatelessWidget {
               children: [
                 Icon(
                   Icons.favorite,
-                  color: Colors.lightBlue,
-                  size: 24.0,
+                  color: Color.fromARGB(255, 33, 190, 128),
+                  size: 40.0,
                 ),
                 SizedBox(width: 15),
                 Text(
                   'Linguagens do Amor',
-                  style: TextStyle(color: Colors.white, fontSize: 20.0),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(width: 15),
                 Icon(
                   Icons.favorite,
-                  color: Colors.lightBlue,
-                  size: 24.0,
+                  color: Color.fromARGB(255, 33, 190, 128),
+                  size: 40.0,
                 ),
               ],
             ),
@@ -60,18 +65,32 @@ class ResultsScreen extends StatelessWidget {
             ...loves.map(
               (love) {
                 return Row(children: [
+                  Image.asset(
+                    'assets/images/${love['letter']}.png',
+                    width: 40,
+                  ),
+                  const SizedBox(width: 10),
                   Text(
                     '${love['title']}:',
-                    style: const TextStyle(color: Colors.white, fontSize: 16.0),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
+                    ),
                   ),
-                  Text(
-                    finalData
-                        .where((data) =>
-                            (data['answer_letter'] as String) ==
-                            (love['letter'] as String))
-                        .length
-                        .toString(),
-                    style: const TextStyle(color: Colors.white, fontSize: 16.0),
+                  Expanded(
+                    child: Text(
+                      finalData
+                          .where((data) =>
+                              (data['answer_letter'] as String) ==
+                              (love['letter'] as String))
+                          .length
+                          .toString(),
+                      textAlign: TextAlign.end,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ]);
               },
@@ -81,10 +100,15 @@ class ResultsScreen extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            TextButton(
-              onPressed: () {},
-              child: const Text('Reset Quiz'),
-            )
+            ElevatedButton.icon(
+              onPressed: startQuiz,
+              style: ElevatedButton.styleFrom(
+                foregroundColor: const Color.fromARGB(255, 245, 228, 188),
+                backgroundColor: const Color.fromARGB(255, 33, 190, 128),
+              ),
+              icon: const Icon(Icons.arrow_right_alt),
+              label: const Text('Refazer Quiz'),
+            ),
           ],
         ),
       ),

@@ -19,14 +19,12 @@ class _QuestionScreenState extends State<QuestionScreen> {
   void answerQuestion(String selectedAnswer) {
     widget.onSelectedAnswer(selectedAnswer);
     setState(() {
-      currentQuestionIndex++;
+      currentQuestionIndex += 2;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final currentQuestion = questions[currentQuestionIndex];
-
     return Container(
       margin: const EdgeInsets.all(40),
       child: SizedBox(
@@ -35,20 +33,27 @@ class _QuestionScreenState extends State<QuestionScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              currentQuestion.text,
-              style: const TextStyle(color: Colors.white),
+            const Text(
+              "Considero mais importante quando:",
+              style: TextStyle(color: Colors.white),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 30),
-            ...currentQuestion.getShuffledAnswers().map((answer) {
-              return AnswerButton(
-                answer,
-                () {
-                  answerQuestion(answer);
-                },
-              );
-            }),
+            AnswerButton(
+              answers[currentQuestionIndex].answer,
+              () {
+                answerQuestion(answers[currentQuestionIndex].answer);
+              },
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            AnswerButton(
+              answers[currentQuestionIndex + 1].answer,
+              () {
+                answerQuestion(answers[currentQuestionIndex + 1].answer);
+              },
+            ),
           ],
         ),
       ),

@@ -7,6 +7,6 @@ const questions = [
   ),
   QuizQuestion(
     "What's the weather forecast for today?",
-    ['Sunny', 'Cloudy', 'Rain', 'Snow'],
+    ['Sunny', 'Cloudy', 'Rain', 'Snowy'],
   ),
 ];
